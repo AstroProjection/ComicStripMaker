@@ -13,3 +13,22 @@ canvas {
   width: 30px;
   height: auto;
 }
+
+
+.buttonContainer{
+  border:1px solid black;
+  position:absolute;
+  justify-self: flex-end;
+}
+
+.comicBoard{
+  display:flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+}
+
+.comicButtons{
+  margin: 0.2rem;
+}
+
+

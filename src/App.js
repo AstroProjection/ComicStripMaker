@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import "./App.css";
-import ComicBoard from "./components/ComicBoard/";
-import Buttons from "./components/ComicButtons";
+import React, { Component } from 'react';
+import styles from './App.module.css';
+import ComicBoard from './components/ComicBoard/';
+import Buttons from './components/ComicButtons';
 
 export default class App extends Component {
   constructor(props) {
@@ -16,64 +16,36 @@ export default class App extends Component {
       allPages: [],
     };
 
-    this.setDrawingState = this.setDrawingState.bind(this);
-    this.setMouseDownState = this.setMouseDownState.bind(this);
+    // this.setDrawingState = this.setDrawingState.bind(this);
+    // this.setMouseDownState = this.setMouseDownState.bind(this);
     this.setCanvasRef = this.setCanvasRef.bind(this);
-    this.setTextState = this.setTextState.bind(this);
+    // this.setTextState = this.setTextState.bind(this);
   }
 
   setAllPagesState(state) {
-    /// [{
-    //  pageNo:0,
-    //  LineLocations:[]...
-    //  Textlocations:[]
-    // }]
     this.setState({ allPages: [...this.state.allPages, state] });
-  }
-
-  setDrawingState(state) {
-    this.setState({ isDrawing: state });
-  }
-
-  setTextState(state) {
-    this.setState({ isText: state });
-  }
-
-  setMouseDownState(state) {
-    this.setState({ mouseDown: state });
   }
 
   setCanvasRef(ref) {
     this.setState({ canvasRef: ref });
   }
 
-  componentDidMount() {
-    window.addEventListener("mouseup", () => {
-      // console.log("mouseup");
-      this.setMouseDownState(false);
-    });
-  }
+  handleAddPage = (page) => {
+    this.setState({ allPages: [...this.state.allPages, page] });
+  };
 
   render() {
     return (
-      <div>
-        <div>ComicStripMaker</div>
-        <ComicBoard
-          drawingState={this.state.isDrawing}
-          setDrawingState={this.setDrawingState}
-          setMouseDownState={this.setMouseDownState}
-          mouseDown={this.state.mouseDown}
-          setCanvasRef={this.setCanvasRef}
-          setTextState={this.setTextState}
-          textState={this.state.isText}
-        />
-        <Buttons
-          setDrawingState={this.setDrawingState}
-          drawingState={this.state.isDrawing}
-          canvasRefState={this.state.canvasRef}
-          setTextState={this.setTextState}
-          textState={this.state.isText}
-        />
+      <div className={styles.container}>
+        <div className={styles.boardContainer}>
+          {this.state.allPages.length > 0
+            ? this.state.allPages.map((page) => (
+                <ComicBoard setCanvasRef={this.setCanvasRef} />
+              ))
+            : 'No pages...'}
+        </div>
+        <Buttons addPage={this.handleAddPage} />
+        {/* <div className={styles.pageView}>Pages</div> */}
       </div>
     );
   }

@@ -7,6 +7,25 @@
   pointer-events: none;
 }
 
+
+.pageView {
+  height: 80px;
+  width: 60%;
+  border: 1px solid black;
+}
+
+.boardContainer{
+  display:flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+}
+
+.container{
+  display:flex;
+  flex-direction: column;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
